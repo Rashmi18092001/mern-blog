@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoutes from './routes/user.route.js';
 
 dotenv.config(); 
+// function call typically used to load environment variables from a .env file into process.env
 
 mongoose
     .connect(process.env.MONGO)
@@ -18,3 +20,5 @@ const app = express();
 app.listen(3000, () => {
     console.log('Server is running on port 3000!');
 })
+
+app.use('/api/user', userRoutes);
