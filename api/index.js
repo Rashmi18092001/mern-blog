@@ -26,3 +26,16 @@ app.listen(3000, () => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+
+// err- error coming, req- user input, res- response to request, next- go to next middleware 
+app.use((err, req, res, next )=>{
+    const statusCode = err.statusCode || 500; // if there is no status code it show 500 otherwise show status code
+
+    const message = err.message || 'Internal Server Error'; //if there is any error show error otherwise show internal server error
+
+    res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message
+    })
+});
